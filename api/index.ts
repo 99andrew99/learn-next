@@ -13,4 +13,38 @@ async function fetchProductDetail(id: string) {
     return await instance.get(`/products/${id}`);
 }
 
-export { fetchProducts, fetchProductDetail };
+//장바구니 아이템 추가
+function createCartItem({
+    id,
+    name,
+    imageUrl,
+    price,
+}: {
+    id: any;
+    name: any;
+    imageUrl: any;
+    price: any;
+}) {
+    return instance.post("/carts", {
+        id: id,
+        name: name,
+        imageUrl: imageUrl,
+        price: price,
+    });
+}
+
+function fetchCarts() {
+    return instance.get("/carts");
+}
+
+function removeCartItem(id: any) {
+    return instance.delete(`/carts/${id}`);
+}
+
+export {
+    fetchProducts,
+    fetchProductDetail,
+    createCartItem,
+    fetchCarts,
+    removeCartItem,
+};
